@@ -1,4 +1,4 @@
-# Advanced SQL
+# Context for Analytics Problems
 
 You work at a social media site. You have to write a lot of queries to get the desired data and stats from the database.
 
@@ -11,64 +11,11 @@ You will be working with the following tables:
 * `messages`: All messages users have sent
 * `test_group`: A table for an A/B test
 
-## Connecting to the database
-
-There's a sql dump of the database in `socialmedia.sql`.
-
-Here are the steps to load it up:
-
-1. First create the database by running `psql` and then the following command:
-
-    ```sql
-    CREATE DATABASE socialmedia;
-    ```
-    Use `\q` to quit `psql`.
-
-2. You can load the sql dump with this command on the command line:
-
-    ```shell
-    psql -U postgres socialmedia < data/socialmedia.sql
-    ```
-
-3. Finally, to run the database:
-
-    ```shell
-    psql -U postgres socialmedia
-    ```
-
-If you're running into issues, make sure you're running `postgres.app`.
-
-
-## Investigate your database
-
-You can get a list of all the tables with this command: `\d`
-
-You can get the info for a specific table with this command: `\d friends`
-
-Start by looking at your tables. Even if someone tells you what a table is, you should look at it to verify that is what you expect. Many times they are not properly documented. You might wonder what the `type` field is. Well, take a look at the table:
-
-```sql
-SELECT * FROM registrations LIMIT 10;
-```
-
-It's also good to get an idea of all the possible values and the distribution:
-
-```sql
-SELECT type, COUNT(*) FROM registrations GROUP BY type;
-```
-
-Look at some rows from every table to get an idea of what you're dealing with.
-
-## Tips:
-* Take a look at the postgres [datetime documentation](http://www.postgresql.org/docs/8.4/static/datatype-datetime.html) if you're unsure how to work with the dates.
-* Try and get practice adding newlines and whitespace so that the queries are easily readable.
-* Sometimes it may be useful to create temporary tables like this: `CREATE TEMPORARY TABLE tmp_table AS SELECT ...` or use a [with query](http://www.postgresql.org/docs/9.1/static/queries-with.html).
-
 
 ## Write Some SQL Queries
-Each of these questions is a prompt for writing a SQL query.
+Each of these questions is a prompt for writing a SQL query. I answered the following questions with
+a partner.
 
-Create a text or markdown file where you put your SQL queries as well as answers to the questions.
 
 1. Get the number of users who have registered each day, ordered by date.
 
