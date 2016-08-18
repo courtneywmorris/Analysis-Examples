@@ -12,12 +12,12 @@ You will be working with the following tables:
 * `test_group`: A table for an A/B test
 
 
-## Write Some SQL Queries
+## SQL Queries
 Each of these questions is a prompt for writing a SQL query. I answered the following questions with
 a partner.
 
 
-1. Get the number of users who have registered each day, ordered by date.
+_1. Get the number of users who have registered each day, ordered by date._
 
 ```sql
 SELECT date_trunc('day', tmstmp) AS date, COUNT(userid)
@@ -26,7 +26,7 @@ GROUP BY date
 ORDER BY date DESC;
 ```
 
-2. Which day of the week gets the most registrations?
+_2. Which day of the week gets the most registrations?_
 
 ```sql
 SELECT week_day, MAX(A.c) m
@@ -39,7 +39,7 @@ ORDER BY m
 LIMIT 1;
 ```
 
-3. You are sending an email to users who haven't logged in in the week before '2014-08-14' and have not opted out of receiving email. Write a query to select these users.
+_3. You are sending an email to users who haven't logged in in the week before '2014-08-14' and have not opted out of receiving email. Write a query to select these users._
 
 ```sql
 SELECT DISTINCT l.userid
@@ -50,7 +50,7 @@ WHERE o.userid IS NULL AND l.tmstmp > '2014-08-7' AND l.tmstmp <= '2014-08-14'
 ORDER BY l.userid;
 ```
 
-4. For every user, get the number of users who registered on the same day as them. Hint: This is a self join (join the registrations table with itself).
+_4. For every user, get the number of users who registered on the same day as them. Hint: This is a self join (join the registrations table with itself)._
 
 ```sql
 SELECT r1.userid, date_trunc('day', tmstmp) AS date, r2.c
@@ -63,7 +63,7 @@ ORDER BY date) r2
 ON date_trunc('day', r1.tmstmp)=r2.date;
 ```
 
-5. You are running an A/B test and would like to target users who have logged in on mobile more times than web. You should only target users in test group A. Write a query to get all the targeted users.
+_5. You are running an A/B test and would like to target users who have logged in on mobile more times than web. You should only target users in test group A. Write a query to get all the targeted users._
 
 ```sql
 SELECT userid, count(type) count, type
@@ -87,7 +87,7 @@ JOIN web ON l.userid=web.userid
 JOIN mobile ON l.userid=mobile.userid AND mobile.count > web.count;
 ```
 
-6. You would like to determine each user's most communicated with user. For each user, determine the user they exchange the most messages with (outgoing plus incoming).
+_6. You would like to determine each user's most communicated with user. For each user, determine the user they exchange the most messages with (outgoing plus incoming)._
 
 ```sql
 CREATE TABLE msg_cnt AS
@@ -123,7 +123,7 @@ FROM max, sums
 WHERE max.mm = sums.total AND sums.s = max.z;
 ```
 
-7. You could also consider the length of the messages when determining the user's most communicated with friend. Sum up the length of all the messages communicated between every pair of users and determine which one is the maximum. This should only be a minor change from the previous query.
+_7. You could also consider the length of the messages when determining the user's most communicated with friend. Sum up the length of all the messages communicated between every pair of users and determine which one is the maximum. This should only be a minor change from the previous query._
 
 ```sql
 CREATE TABLE msg_len AS
@@ -158,7 +158,7 @@ FROM max, sums
 WHERE max.mm = sums.total AND sums.s = max.z;
 ```
 
-8. What percent of the time are the above two answers different?
+_8. What percent of the time are the above two answers different?_
 
 ```sql
 SELECT SUM(A.ratio)/ CAST (COUNT(*) AS FLOAT)*100
