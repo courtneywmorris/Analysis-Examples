@@ -1,4 +1,4 @@
-# Context for Analytics Problems
+## Context for Analytics Problems
 
 You work at a social media site. You have to write a lot of queries to get the desired data and stats from the database.
 
